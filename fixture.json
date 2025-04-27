@@ -1,0 +1,133 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 22,
+    "fields": {
+        "name": "Ноутбуки",
+        "description": "Разные ноутбуки"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 23,
+    "fields": {
+        "name": "Смартфоны",
+        "description": "Мобильные телефоны"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 24,
+    "fields": {
+        "name": "Планшеты",
+        "description": "Планшетные компьютеры"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 25,
+    "fields": {
+        "name": "Смарт-часы",
+        "description": "Умные часы для всех"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 26,
+    "fields": {
+        "name": "Телевизоры",
+        "description": "Современные телевизоры"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "MacBook Pro",
+        "description": "Apple ноутбук",
+        "image": "",
+        "category": 22,
+        "price": 10000.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+        "name": "iPad Air",
+        "description": "Планшет Apple",
+        "image": "",
+        "category": 24,
+        "price": 700.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+        "name": "Samsung Galaxy Tab S8",
+        "description": "Планшет Samsung",
+        "image": "",
+        "category": 24,
+        "price": 650.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 11,
+    "fields": {
+        "name": "Apple Watch Series 8",
+        "description": "Смарт-часы Apple",
+        "image": "",
+        "category": 25,
+        "price": 400.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 12,
+    "fields": {
+        "name": "Huawei Watch GT 3",
+        "description": "Смарт-часы Huawei",
+        "image": "",
+        "category": 25,
+        "price": 250.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 13,
+    "fields": {
+        "name": "LG OLED55",
+        "description": "55-дюймовый OLED телевизор",
+        "image": "",
+        "category": 26,
+        "price": 1500.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 14,
+    "fields": {
+        "name": "Samsung QLED Q80A",
+        "description": "QLED телевизор Samsung",
+        "image": "",
+        "category": 26,
+        "price": 1200.0,
+        "created_at": "2025-04-27",
+        "updated_at": "2025-04-27"
+    }
+}
+]
