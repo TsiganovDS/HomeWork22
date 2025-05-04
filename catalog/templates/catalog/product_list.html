@@ -20,6 +20,7 @@
                 {% endif %}
                 Цена: {{ product.price }} руб.
                 {{ product.description|truncatechars:100 }}
+                <a href="{% url 'catalog:product_detail' product.id %}">Подробнее</a>
             </li>
         {% empty %}
             <li class="list-group-item">Нет товаров</li>
