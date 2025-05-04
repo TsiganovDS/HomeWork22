@@ -14,7 +14,7 @@
             <li class="list-group">
                 <strong class="mt-4"> {{ product.name }}</strong><br>
                 {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150" class="d-block mx-auto my-2">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" class="d-block mx-auto my-2">
                 {% else %}
                     <img src="/static/no-image.png" alt="Нет фото" width="100">
                 {% endif %}

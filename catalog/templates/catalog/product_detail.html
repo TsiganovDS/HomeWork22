@@ -19,6 +19,7 @@
             {% endif %}
             <p><strong>Цена:</strong> {{ product.price }} руб.</p>
             <p>{{ product.description }}</p>
+            <a href="{% url 'catalog:product_list' %}">Назад к списку товаров</a>
         </div>
     </div>
 </body>
