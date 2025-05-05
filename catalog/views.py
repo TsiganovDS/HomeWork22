@@ -14,8 +14,11 @@ def product_list(request):
     context = {'products': products}
     return render(request, 'catalog/product_list.html', context)
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    return render(request, 'catalog/product_detail.html', {'product': product})
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    context = {
+        "product": product
+    }
+    return render(request, "catalog/product_detail.html", context=context)
 
 
