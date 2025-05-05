@@ -1,0 +1,22 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Описание товара{% endblock %}
+
+{% block content %}
+{% include 'catalog/header.html' %}
+    <h1 class="text-center">Описание товара</h1>
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body text-center">
+            <h2 class="card-title">{{ product.name }}</h2>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" class="d-block mx-auto mb-3">
+            {% else %}
+                <img src="/static/no-image.png" alt="Нет фото" width="200" class="d-block mx-auto mb-3">
+            {% endif %}
+            <p><strong>Цена:</strong> {{ product.price }} руб.</p>
+            <p>{{ product.description }}</p>
+            <a href="{% url 'catalog:product_list' %}" class="p-2 btn btn-outline-primary" >Назад к списку товаров</a>
+            <a href="{% url 'catalog:home' %}" class="p-2 btn btn-outline-primary">Вернуться на главную</a>
+        </div>
+    </div>
+{% endblock %}

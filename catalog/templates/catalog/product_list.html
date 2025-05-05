@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Список товаров{% endblock %}
+
+{% block content %}
+{% include 'catalog/header.html' %}
+<h1 class="text-center">Список товаров</h1>
+<ul class="list-group-item text-center">
+    {% for product in products %}
+    <li class="list-group">
+        <strong class="mt-4"> {{ product.name }}</strong><br>
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" class="d-block mx-auto my-2">
+        {% else %}
+            <img src="/static/no-image.png" alt="Нет фото" width="100">
+        {% endif %}
+            Цена: {{ product.price }} руб.
+            {{ product.description|truncatechars:100 }}
+            <a href="{% url 'catalog:product_detail' product.id %}">Подробнее</a>
+    </li>
+        {% empty %}
+            <li class="list-group-item">Нет товаров</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
