@@ -1,4 +1,4 @@
-from audioop import reverse
+from django.urls import reverse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
