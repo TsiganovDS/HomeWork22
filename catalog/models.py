@@ -27,5 +27,7 @@ class Product(models.Model):
         verbose_name_plural = 'Товары'
         ordering = ['name', 'category', 'price']
 
+
+
     def __str__(self):
         return f'{self.name} {self.description}'

@@ -33,6 +33,7 @@ class ProductCreateView(CreateView):
         Product.objects.filter(id=self).delete()
 
 
+
 class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'

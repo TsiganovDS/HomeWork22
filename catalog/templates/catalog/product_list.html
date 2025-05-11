@@ -3,8 +3,10 @@
 {% block title %}Список товаров{% endblock %}
 {% block content %}
 {% include 'catalog/header.html' %}
-<h1 class="text-center">Список товаров</h1>
-<a class="p-2 btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Создать продукт</a>
+<div class="d-flex justify-content-center my-3">
+    <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Создать продукт</a>
+</div>
+<h1 class="text-center" >Список товаров</h1>
 <ul class="list-group-item text-center">
     {% for product in products %}
     <li class="list-group">
