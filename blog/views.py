@@ -1,4 +1,4 @@
-from django.urls import reverse
+rom django.urls import reverse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -15,6 +15,7 @@ class BlogListView(ListView):
 class BlogDetailView(DetailView):
     model = Blog
     template_name = "blog/blog_detail.html"
+    success_url = reverse_lazy('blog:blog_list')
 
     def get_object(self, queryset=None):
         blog = super().get_object(queryset)
