@@ -1,0 +1,9 @@
+{% extends "users/base.html" %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <h1>Профиль</h1>
+        <p>Привет, {{ user.email }}!</p>
+        <p><a href="{% url 'users:logout' %}">Выйти</a></p>
+{% endblock %}
