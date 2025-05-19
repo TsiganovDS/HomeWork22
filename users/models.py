@@ -5,7 +5,7 @@ from django_countries.fields import CountryField
 
 class CustomUser(AbstractUser):
     email = models.EmailField('email address', unique=True)
-
+    username = None
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     phone_number = models.CharField(
         max_length=20,
@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     country = CountryField(blank=True, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username',]
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
