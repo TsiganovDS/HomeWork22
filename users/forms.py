@@ -9,7 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
     usable_password = None
     class Meta:
         model = CustomUser
-        fields = ("username", "email")
+        fields = ("email", "password")
 
 
     def clean_email(self):
