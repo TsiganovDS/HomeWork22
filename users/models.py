@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
     country = CountryField(blank=True, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username',]
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
