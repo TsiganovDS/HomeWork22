@@ -19,6 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError(
                 "Пользователь с такой электронной почтой уже зарегистрирован."
             )
+
         return email
 
     def clean_phone_number(self):
