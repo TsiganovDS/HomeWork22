@@ -1,16 +1,17 @@
 from django.db import models
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
-        ordering = ['name', 'description']
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+        ordering = ["name", "description"]
 
     def __str__(self):
-        return f'{self.name} {self.description}'
+        return f"{self.name} {self.description}"
 
 
 class Product(models.Model):
@@ -23,11 +24,9 @@ class Product(models.Model):
     updated_at = models.DateField(auto_now=True)
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
-        ordering = ['name', 'category', 'price']
-
-
+        verbose_name = "Товар"
+        verbose_name_plural = "Товары"
+        ordering = ["name", "category", "price"]
 
     def __str__(self):
-        return f'{self.name} {self.description}'
+        return f"{self.name} {self.description}"
