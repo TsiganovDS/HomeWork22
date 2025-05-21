@@ -6,11 +6,10 @@ from users.models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
-    usable_password = None
 
     class Meta:
         model = CustomUser
-        fields = ("email", "password")
+        fields = ("email",)
 
     def clean_email(self):
         email = self.cleaned_data["email"]
