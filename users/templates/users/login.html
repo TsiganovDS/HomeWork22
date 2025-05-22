@@ -9,7 +9,6 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button class="btn btn-outline-primary" type="submit">Войти</button>
-
       {% if form.errors %}
           <div class="error">
               {% for field in form %}

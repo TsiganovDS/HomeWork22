@@ -6,11 +6,10 @@ from users.models import CustomUser
 
 
 class CustomUserCreationForm(UserCreationForm):
-    usable_password = None
 
     class Meta:
         model = CustomUser
-        fields = ("email", "password")
+        fields = ("email",)
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -19,10 +18,5 @@ class CustomUserCreationForm(UserCreationForm):
             raise forms.ValidationError(
                 "Пользователь с такой электронной почтой уже зарегистрирован."
             )
-        return email
 
-    def clean_phone_number(self):
-        phone_number = self.cleaned_data.get("phone_number")
-        if phone_number and not phone_number.isdigit():
-            raise forms.ValidationError("Номер телефона должен содержать только цифры.")
-        return phone_number
+        return email

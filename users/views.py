@@ -3,11 +3,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from dotenv import load_dotenv
 
 from users.forms import CustomUserCreationForm
-
-load_dotenv()
 
 
 class HomeView(CreateView):
