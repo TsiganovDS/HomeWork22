@@ -1,8 +1,14 @@
-from django.contrib.auth import login
+from urllib import request
+
+from django.contrib.auth import login, get_user_model
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+
+from catalog.models import Product
 from users.forms import CustomUserCreationForm
 
 

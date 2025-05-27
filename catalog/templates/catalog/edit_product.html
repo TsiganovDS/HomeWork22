@@ -1,0 +1,21 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+         <div class="col-md-8">
+             <div class="card">
+                 <div class="card-header text-center">
+                     <h1 class="text-dark" >Редактировать: <br>{{ product.name }}</h1>
+                     <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="p-2 btn btn-outline-primary" type="submit">Сохранить изменения</button>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_list' %}">Назад к списку продуктов</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

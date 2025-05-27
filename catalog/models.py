@@ -1,3 +1,6 @@
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 from django.db import models
 
 
@@ -22,8 +25,15 @@ class Product(models.Model):
     price = models.FloatField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    is_published = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=False)
+
 
     class Meta:
+        permissions = [
+            ("can_unpublish_product", "Может отменять публикацию продукта"),
+            ("can_delete_any_product", "Может удалять любой продукт"),
+        ]
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
         ordering = ["name", "category", "price"]

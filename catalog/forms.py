@@ -53,18 +53,17 @@ class ProductForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data.get("image")
-
         if image:
-            valid_mime_types = ["image/jpeg", "image/png"]
-            if image.content_type not in valid_mime_types:
-                raise forms.ValidationError(
-                    "Изображение должно быть в формате JPEG или PNG."
-                )
-
-            max_size = 5 * 1024 * 1024
-            if image.size > max_size:
-                raise forms.ValidationError(
-                    "Размер изображения не должен превышать 5 МБ."
-                )
+            if hasattr(image, 'content_type'):
+                if image.content_type not in ['image/jpeg', 'image/png', 'image/gif']:
+                    raise forms.ValidationError('Изображение должно быть в формате JPEG или PNG.')
+                elif image.size > 5 * 1024 * 1024:  # ограничение 2 МБ
+                    raise forms.ValidationError('Размер изображения не должен превышать 5 МБ.')
 
         return image
+
+
+class ProductModeratorForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "description", "image", "category", "price"]
