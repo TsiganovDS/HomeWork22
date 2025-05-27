@@ -4,24 +4,37 @@
 {% block content %}
 {% include 'catalog/header.html' %}
 <div class="d-flex justify-content-center my-3">
-    <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Создать продукт</a>
+    {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Создать продукт</a>
+    {% endif %}
 </div>
-<h1 class="text-center" >Список товаров</h1>
-<ul class="list-group-item text-center">
+<h1 class="text-center">Список товаров</h1>
+<ul class="list-group text-center">
     {% for product in products %}
-    <li class="list-group">
-        <strong class="mt-4"> {{ product.name }}</strong><br>
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" class="d-block mx-auto my-2">
-        {% else %}
-            <img src="/static/no-image.png" alt="Нет фото" width="100">
-        {% endif %}
+        <li class="list-group-item my-5">
+            <h2>{{ product.name }}</h2>
+            {% if user.is_authenticated and user == product.owner or user.is_staff %}
+                <a class="btn btn-outline-primary" href="{% url 'catalog:edit_product' product.id %}">Редактировать</a>
+                <a class="btn btn-outline-primary" href="{% url 'catalog:un_publish_product' product.id %}">Отменить публикацию</a>
+            {% endif %}
+            {% if perms.catalog.can_delete_any_product %}
+                <a class="btn btn-outline-danger" href="{% url 'catalog:product_confirm_delete' product.id %}">Удалить</a>
+            {% endif %}
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" class="d-block mx-auto my-2">
+            {% else %}
+                <img src="/static/no-image.png" alt="Нет фото" width="100">
+            {% endif %}
             Цена: {{ product.price }} руб.
+
             {{ product.description|truncatechars:100 }}
-            <a href="{% url 'catalog:product_detail' product.id %}">Подробнее</a>
-    </li>
-        {% empty %}
-            <li class="list-group-item">Нет товаров</li>
-        {% endfor %}
-    </ul>
+            <div>
+                <a class="btn btn-outline-primary" href="{% url 'catalog:product_detail' product.id %}">Подробнее</a>
+            </div>
+        </li>
+    {% empty %}
+        <li class="list-group-item">Нет товаров</li>
+    {% endfor %}
+</ul>
 {% endblock %}

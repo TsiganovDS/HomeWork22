@@ -15,10 +15,9 @@
                     Привет, {{ user.email }}!
                 {% else %}
                     <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
-                    Привет, Гость!
+                    Привет, гость!
                 {% endif %}
             </form>
-
         </nav>
     </div>
 

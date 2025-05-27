@@ -9,6 +9,16 @@
             <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
             <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog' %}">Блог</a>
             <a href="{% url 'catalog:home' %}" class="p-2 btn btn-outline-primary">На главную</a>
+            <form method="post" action="{% url 'users:logout' %}" style="display: inline;">
+                {% if user.is_authenticated %}
+                <button type="submit" class="p-2 btn btn-outline-primary" >Выйти</button>
+                    {% csrf_token %}
+                    Привет, {{ user.email }}!
+                {% else %}
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+                    Привет, гость!
+                {% endif %}
+            </form>
 
         </nav>
     </div>
