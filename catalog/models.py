@@ -28,11 +28,9 @@ class Product(models.Model):
     is_published = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, default=False)
 
-
     class Meta:
         permissions = [
             ("can_unpublish_product", "Может отменять публикацию продукта"),
-            ("can_delete_any_product", "Может удалять любой продукт"),
         ]
         verbose_name = "Товар"
         verbose_name_plural = "Товары"

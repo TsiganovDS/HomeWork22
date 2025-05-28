@@ -1,4 +1,4 @@
-from django.contrib.auth.models import Permission, Group
+from django.contrib.auth.models import Group, Permission
 from django.core.management.base import BaseCommand
 
 from catalog.models import Category, Product
@@ -6,9 +6,9 @@ from catalog.models import Category, Product
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        group, created = Group.objects.get_or_create(name='Модератор продуктов')
-        permission = Permission.objects.get(codename='can_unpublish_product')
-        group.permissions.add(Permission.objects.get(codename='can_delete_any_product'))
+        group, created = Group.objects.get_or_create(name="Модератор продуктов")
+        permission = Permission.objects.get(codename="can_unpublish_product")
+        group.permissions.add(Permission.objects.get(codename="can_delete_any_product"))
         group.permissions.add(permission)
         help = "Удаляет все продукты и категории, затем добавляет тестовые"
 
