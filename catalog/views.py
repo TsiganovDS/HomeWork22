@@ -2,15 +2,35 @@ from urllib import request
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  TemplateView, UpdateView)
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
 
 from .forms import ProductForm, ProductModeratorForm
-from .models import Product
+from .models import Category, Product
+from .servises import get_products_by_category
+
+
+def products_by_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+    products = get_products_by_category(category_id)
+    return render(
+        request,
+        "catalog/product_list.html",
+        {"category": category, "products": products},
+    )
 
 
 def user_can_unpublish(user):
@@ -18,7 +38,7 @@ def user_can_unpublish(user):
 
 
 @user_passes_test(user_can_unpublish)
-def un_publish_product(request, product_id):
+def un_publish_product(product_id):
     product = get_object_or_404(Product, id=product_id)
     product.is_published = False
     product.save()
@@ -66,9 +86,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
             form = ProductForm()
         return render(request, "create_product.html", {"form": form})
 
-    def product_confirm_delete(self):
-        Product.objects.filter(id=self).delete()
-
     def get_form_class(self):
         user = self.request.user
         if user.is_authenticated:
@@ -80,18 +97,21 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
             return ProductModeratorForm
         raise PermissionDenied
 
-    def get_object(self, queryset=None):
-        self.user = super().get_object()
-        if self.request.user == self.object.owner:
-            return ProductForm
 
-
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = "catalog/product_list.html"
     context_object_name = "products"
 
+    def get_queryset(self):
+        products = cache.get("product_list")
+        if products is None:
+            products = Product.objects.all()
+            cache.set("product_list", products, 60 * 15)
+        return products
 
+
+@method_decorator(cache_page(60 * 15), name="dispatch")
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/product_detail.html"
@@ -133,3 +153,19 @@ def edit_product(request, product_id):
     else:
         form = ProductForm(instance=product)
     return render(request, "catalog:edit_product.html", {"form": form})
+
+
+class CategoryListView(ListView):
+    model = Product
+    template_name = "catalog/products_by_category.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        category_id = self.kwargs.get("category_id")
+        return Product.objects.filter(category_id=category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get("category_id")
+        context["category"] = Category.objects.get(pk=category_id)
+        return context

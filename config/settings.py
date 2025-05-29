@@ -15,6 +15,8 @@ import os
 
 from dotenv import load_dotenv
 
+import config
+
 load_dotenv()
 
 
@@ -148,6 +150,13 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "users:login"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

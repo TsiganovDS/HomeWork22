@@ -6,6 +6,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
     description = models.TextField()
 
     class Meta:
@@ -26,7 +27,7 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=False)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         permissions = [

@@ -14,6 +14,7 @@
             {% endif %}
             <p><strong>Цена:</strong> {{ product.price }} руб.</p>
             <p>{{ product.description }}</p>
+            <a href="{% url 'catalog:category_list' product.category.id %}" class="btn btn-outline-primary">Товары в категории</a>
             <a href="{% url 'catalog:product_confirm_delete' product.id %}" class="btn btn-outline-danger">Удалить товар</a>
             <a href="{% url 'catalog:product_list' %}" class="p-2 btn btn-outline-primary" >Назад к списку товаров</a>
         </div>
